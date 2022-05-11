@@ -1,17 +1,17 @@
 package jogo;
-import tabuleiro.Tabuleiro;
+import tabuleiro.Tabuleiro9x9;
 import java.util.Scanner;
 
-public class Iniciar {
+public class Iniciar9x9 {
 	
-	public void SodokuPlay(){
-		Tabuleiro sudoku = new Tabuleiro(9,9);
+	public void SudokuPlay(){
+		Tabuleiro9x9 sudoku = new Tabuleiro9x9();
 		Scanner scan = new Scanner(System.in);
 		
 		sudoku.zerarString(sudoku.getTabuleiroGabarito(), "0");
 		sudoku.zerarString(sudoku.getErrosEspaço(), " ");
 		
-		sudoku.randomTabuleiro(sudoku.getTabuleiroGabarito());
+		sudoku.randomTabuleiro(sudoku.getTabuleiroGabarito(), sudoku.getElementosDisponiveis9x9());
 		sudoku.copiarTabuleiro();
 		
 		
@@ -40,7 +40,7 @@ public class Iniciar {
 				System.out.println("Vai querer ajuda? (0/1) ");
 				ajuda = scan.nextInt();
 				if(ajuda == 1) {
-					sudoku.botaoAjuda(linha, coluna);
+					sudoku.botaoAjuda(linha, coluna, sudoku.getElementosDisponiveis9x9());
 				}else{
 					System.out.println("Digite um numero:");
 					numero = scan.next().substring(0, 1);
