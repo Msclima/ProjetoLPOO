@@ -2,7 +2,9 @@ package jogo;
 import tabuleiro.Tabuleiro12x12;
 import java.util.Scanner;
 
-public class Iniciar12x12 {
+import exceptions.ElementoInvalidoException;
+
+public class Iniciar12x12  {
 	
 	public void SudokuPlay(){
 		Tabuleiro12x12 sudoku = new Tabuleiro12x12();
@@ -44,7 +46,7 @@ public class Iniciar12x12 {
 				}else{
 					System.out.println("Digite um numero:");
 					numero = scan.next().substring(0, 1).toUpperCase();
-					sudoku.jogada(linha, coluna, numero, sudoku.getTabuleiroCompletavel());
+					sudoku.jogada(linha, coluna, numero, sudoku.getTabuleiroCompletavel(), sudoku.getElementosDisponiveis12x12());
 				}
 			}else System.out.println("espaço invalido");
 			

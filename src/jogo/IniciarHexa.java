@@ -4,6 +4,8 @@ import tabuleiro.TabuleiroHexadecimal;
 
 import java.util.Scanner;
 
+import exceptions.ElementoInvalidoException;
+
 public class IniciarHexa {
 	
 	public void SudokuPlay(){
@@ -46,7 +48,7 @@ public class IniciarHexa {
 				}else{
 					System.out.println("Digite um numero:");
 					numero = scan.next().substring(0, 1);
-					sudoku.jogada(linha, coluna, numero, sudoku.getTabuleiroCompletavel());
+					sudoku.jogada(linha, coluna, numero, sudoku.getTabuleiroCompletavel(), sudoku.getElementosDisponiveisHexa());
 				}
 			}else System.out.println("espaço invalido");
 			
