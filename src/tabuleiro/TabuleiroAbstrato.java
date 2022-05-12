@@ -88,6 +88,9 @@ public abstract class TabuleiroAbstrato {
 	public ArrayList<String> getRangeElementos() {
 		return rangeElementos;
 	}
+	
+	public abstract String[] getElementosDisponiveis();
+	
 
 	// numeros possiveis para colocar no tabuleiro random
 	public void criarRange(String[] elementosDisponiveis) {
@@ -236,7 +239,7 @@ public abstract class TabuleiroAbstrato {
 	
 	public void ocultandoTabuleiro(String[][] tabuleiro){
 		//cada "caixa" ira ter 4 zeros
-		int zeros=0;
+		int zeros=4;
 	
 		//vai de submatriz em submatriz
 		for(int linha=0; linha<tamanhoGrid;linha+=tamanhoLinhaSub) {
@@ -254,7 +257,7 @@ public abstract class TabuleiroAbstrato {
 					}	
 				}
 				
-			zeros=0;
+			zeros=4;
 			}
 			
 		}

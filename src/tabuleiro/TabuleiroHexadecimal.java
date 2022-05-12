@@ -10,7 +10,7 @@ public class TabuleiroHexadecimal extends TabuleiroAbstrato{
 		
 	}
 	
-	public String[] getElementosDisponiveisHexa() {
+	public String[] getElementosDisponiveis() {
 		return elementosDisponiveisHexa;
 	}
 }
