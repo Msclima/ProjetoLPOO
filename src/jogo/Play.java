@@ -36,9 +36,9 @@ public class Play {
 			
 		case 3:
 			// não esta funcionando para o hexadecimal, irei resolver apos o checkpoint 3
-			//sudoku = new TabuleiroHexadecimal();
-			//iniciar = new Iniciar(sudoku);
-			//iniciar.comecar();
+			sudoku = new TabuleiroHexadecimal();
+			iniciar = new Iniciar(sudoku);
+			iniciar.comecar();
 
 		}
 

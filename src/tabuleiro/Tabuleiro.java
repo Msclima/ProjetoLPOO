@@ -112,7 +112,7 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 						coluna=-1;
 						rangeElementos.removeAll(rangeElementos);
 						criarRange(elementosDisponiveis);
-						zerarString(tabuleiroGabarito, "0");
+						zerarString(tabuleiro, "0");
 
 						
 						break;
@@ -204,10 +204,9 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 	}
 
 	public void ocultandoTabuleiro(String[][] tabuleiro){
-		//cada "caixa" ira ter 4 zeros
+		
 		int zeros=38;
 		int linha, coluna;
-		//vai de submatriz em submatriz
 		while(zeros>0) {
 			linha= random.nextInt(tamanhoGrid);
 			coluna= random.nextInt(tamanhoGrid);
@@ -223,7 +222,7 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 	public void copiarTabuleiro(String[][] tabuleiro1, String[][] tabuleiro2) {
 		for(int i=0;i<tamanhoGrid;i++) {
 			for(int j=0;j<tamanhoGrid;j++) {
-				tabuleiro2[i][j] = tabuleiro1[i][j];
+				tabuleiro2[i][j] = tabuleiro1[i][j];	
 			}
 		}
 	}
