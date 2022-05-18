@@ -260,6 +260,20 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 		}
 		return true;
 	}
+	
+	//teste
+	public boolean ehSudokuResolvido(){
+		for(int linha=0;linha<tamanhoGrid; linha++) {
+			for(int coluna=0;coluna<tamanhoGrid; coluna++) {
+				if(!tabuleiroGabarito[linha][coluna].equals(tabuleiroCompletavel[linha][coluna])) {
+					return false;
+				}
+
+			}
+
+		}
+		return true;
+	}
 
 
 	public void jogada(int linha, int coluna, String elemento, String[][] tabuleiro, String[] range)

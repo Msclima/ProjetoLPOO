@@ -13,26 +13,55 @@ public class Iniciar {
 	private Tabuleiro tabuleiro;
 
 	Scanner scan = new Scanner(System.in);
-	int linha,coluna, ajuda;
+	int linha,coluna, ajuda, escolha;
 	String numero;
 
-	public Iniciar(Tabuleiro tabuleiro) {
-		this.tabuleiro = tabuleiro;
+	public Iniciar() {
+		escolherTabuleiro();
+		iniciarTabuleiro();
+		comecarJogo();
 	}
 
-	public void comecar() {
-
+	
+	private void iniciarTabuleiro() {
 		tabuleiro.zerarString(tabuleiro.getTabuleiroGabarito(), "0");
 		tabuleiro.zerarString(tabuleiro.getErrosEspaço(), " ");
 		tabuleiro.randomTabuleiro(tabuleiro.getTabuleiroGabarito(), tabuleiro.getElementosDisponiveis());
 		tabuleiro.copiarTabuleiro(tabuleiro.getTabuleiroGabarito(), tabuleiro.getTabuleiroCompletavel());
 		//tabuleiro.mostrarTabuleiro(tabuleiro.getTabuleiroGabarito());
 		tabuleiro.ocultandoTabuleiro(tabuleiro.getTabuleiroCompletavel());
+		tabuleiro.mostrarTabuleiro(tabuleiro.getTabuleiroCompletavel());
+		tabuleiro.zerarString(tabuleiro.getErrosEspaço(), " ");
+		
+		
+	}
+	
+	private void escolherTabuleiro() {
+		System.out.println("qual Sudoku?");
+		escolha = scan.nextInt();
+		switch(escolha) {
+		case 1:
+			tabuleiro = new Tabuleiro9x9();
+			
+			break;
+
+		case 2: 
+			tabuleiro = new Tabuleiro12x12();
+		
+			break;
+			
+		case 3:
+			tabuleiro = new TabuleiroHexadecimal();
+			
+			break;
+		}
+	}
+	
+	
+	private void comecarJogo() {
 		
 		while(!tabuleiro.ehTabuleirosIguais()) {
-
-			tabuleiro.mostrarTabuleiro(tabuleiro.getTabuleiroCompletavel());
-			tabuleiro.zerarString(tabuleiro.getErrosEspaço(), " ");
+			
 			System.out.println("Digite a linha:");
 			linha = scan.nextInt();
 			System.out.println("Digite a coluna:");
