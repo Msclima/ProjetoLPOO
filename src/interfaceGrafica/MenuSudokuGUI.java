@@ -1,4 +1,4 @@
-package sudokuGUI;
+package interfaceGrafica;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -57,12 +57,6 @@ public class MenuSudokuGUI extends JFrame implements ActionListener{
 	}
 	
 	
-	
-	
-	public static void main(String[] args) {
-		new MenuSudokuGUI();
-		
-	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

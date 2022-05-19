@@ -1,6 +1,7 @@
 package jogo;
 
 
+import java.io.Serializable;
 import java.util.Scanner;
 
 import exceptions.AtributoInvalidoException;
@@ -9,9 +10,8 @@ import tabuleiro.Tabuleiro9x9;
 import tabuleiro.Tabuleiro12x12;
 import tabuleiro.TabuleiroHexadecimal;
 
-public class Iniciar {
+public class Iniciar implements Serializable{
 	private  Tabuleiro tabuleiro;
-
 	private  Scanner scan = new Scanner(System.in);
 	private  int linha,coluna, ajuda, escolha, dificuldade;
 	private  String numero;

@@ -1,12 +1,12 @@
 package tabuleiro;
 
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import exceptions.AtributoInvalidoException;
 
 
-public abstract class Tabuleiro implements TabuleiroGameLogic {
+public abstract class Tabuleiro implements TabuleiroGameLogic, Serializable {
 	Random random = new Random(); // função random
 
 	private final int tamanhoGrid;

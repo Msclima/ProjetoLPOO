@@ -1,4 +1,4 @@
-package sudokuGUI;
+package interfaceGrafica;
 
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -80,8 +80,5 @@ public class JogoSudokuGUI extends JFrame{
 		
 	}
 	
-	public static void main(String[] args) {
-		new JogoSudokuGUI();
-	}
 	
 }
