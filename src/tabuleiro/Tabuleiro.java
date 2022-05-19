@@ -13,6 +13,7 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 	private final int tamanhoLinhaSub;
 	private final int tamanhoColunaSub;
 	private final int quantidadeElemDisponiveis;
+	private final int dificuldade;
 	
 	private String[][] tabuleiroGabarito;
 	private String[][] tabuleiroCompletavel;
@@ -20,9 +21,10 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 
 	private ArrayList<String> rangeElementos = new ArrayList<>(); 
 
-	public Tabuleiro(int linha, int coluna) {
+	public Tabuleiro(int linha, int coluna, int dificuldade) {
 		this.tamanhoLinhaSub = linha;
 		this.tamanhoColunaSub = coluna;
+		this.dificuldade = dificuldade;
 		this.tamanhoGrid = linha*coluna;
 		this.quantidadeElemDisponiveis = linha*coluna;
 		this.tabuleiroGabarito = new String[tamanhoGrid][tamanhoGrid];
@@ -131,7 +133,16 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 
 	public void mostrarTabuleiro(String[][] tabuleiro) {
 		for(int i=0;i<tamanhoGrid;i++) {
+			if(i % tamanhoLinhaSub == 0 && i !=0 ) {
+				for(int x=0; x<tamanhoGrid*2+1; x++) {
+					System.out.print("-");
+				}
+				System.out.println();
+			}
 			for(int j=0;j<tamanhoGrid;j++) {
+				if(j % tamanhoColunaSub == 0 && j!=0) {
+					System.out.print("|");
+				}
 				if(tabuleiro[i][j].equals("0")) {
 					System.out.print(" "+ errosEspaço[i][j]);
 				}else System.out.print(tabuleiro[i][j]+ errosEspaço[i][j]);	
@@ -140,8 +151,6 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 		}
 
 	}
-
-
 
 
 	public boolean numeroRepeteLinha(int linha, int coluna, String numero, String[][] tabuleiro) {
@@ -205,7 +214,7 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 
 	public void ocultandoTabuleiro(String[][] tabuleiro){
 		
-		int zeros=38;
+		int zeros=dificuldade;
 		int linha, coluna;
 		while(zeros>0) {
 			linha= random.nextInt(tamanhoGrid);
@@ -248,24 +257,10 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 
 
 	// metodo para saber se o jogo ainda esta ocorrendo
-	public boolean ehTabuleirosIguais() {
-		for(int linha=0;linha<tamanhoGrid; linha++) {
-			for(int coluna=0;coluna<tamanhoGrid; coluna++) {
-				if(!tabuleiroGabarito[linha][coluna].equals(tabuleiroCompletavel[linha][coluna])) {
-					return false;
-				}
-
-			}
-
-		}
-		return true;
-	}
-	
-	//teste
 	public boolean ehSudokuResolvido(){
 		for(int linha=0;linha<tamanhoGrid; linha++) {
 			for(int coluna=0;coluna<tamanhoGrid; coluna++) {
-				if(!tabuleiroGabarito[linha][coluna].equals(tabuleiroCompletavel[linha][coluna])) {
+				if(tabuleiroCompletavel[linha][coluna].equals("0")) {
 					return false;
 				}
 
@@ -279,16 +274,19 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 	public void jogada(int linha, int coluna, String elemento, String[][] tabuleiro, String[] range)
 			throws AtributoInvalidoException {
 
-		if(elemento == "") {
+		if(elemento.equals("0")) {
 			apagar(linha, coluna, tabuleiro);
-			//colocar metodo que procure a string no array
+			preencher(linha,coluna," ",errosEspaço);
+			
 		}else{
 			if(existeElemento(elemento, range)) {
 				preencher(linha, coluna, elemento, tabuleiro);
+				preencher(linha,coluna,",",errosEspaço);
+				
 				if(numeroRepeteTudo(linha, coluna, elemento, tabuleiro)) {
-					preencher(linha, coluna, "0", tabuleiro);
+					apagar(linha, coluna, tabuleiro);
+					preencher(linha,coluna," ",errosEspaço);
 					verErros(linha, coluna, elemento);
-					//usar throws
 					System.out.println("numero repete");
 				}
 				
@@ -314,13 +312,14 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 
 
 
+
 	// Esses "*" para visualizar que o numero repete
 	public void verErrosLinha(int linha, int coluna, String numero) {
 
 		for(int i=0; i<tamanhoGrid; i++) {
 			if(i!=coluna) {
 
-				if(tabuleiroCompletavel[linha][i].equals(numero)) {
+				if(tabuleiroCompletavel[linha][i].equals(numero) && !errosEspaço[linha][i].equals(",")) {
 					errosEspaço[linha][i] = "*" ;
 
 				}
@@ -333,7 +332,7 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 	public void verErrosColuna(int linha, int coluna, String numero) {
 		for(int i=0; i<tamanhoGrid; i++) {
 			if(i!=linha) {
-				if(tabuleiroCompletavel[i][coluna].equals(numero)) {
+				if(tabuleiroCompletavel[i][coluna].equals(numero)  && !errosEspaço[i][coluna].equals(",")) {
 					errosEspaço[i][coluna] = "*" ;
 
 
@@ -350,7 +349,7 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 			for(int j=colunaSub; j<colunaSub+tamanhoColunaSub; j++) {
 
 				if((i!=linha) || (j!=coluna)) {
-					if(tabuleiroCompletavel[i][j].equals(numero)) {
+					if(tabuleiroCompletavel[i][j].equals(numero)  && !errosEspaço[i][j].equals(",")) {
 						errosEspaço[i][j] = "*" ;
 
 					}
@@ -369,7 +368,6 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 		verErrosColuna(linha, coluna, numero);
 		verErrosSub(linha, coluna, numero);
 	}
-
 
 
 	public void executarAjuda(int linha, int coluna, String[] elementosDisponiveis) {
@@ -391,4 +389,8 @@ public abstract class Tabuleiro implements TabuleiroGameLogic {
 	public void botaoAjuda(int linha, int coluna, String[] ElementosDisponiveis) {
 		executarAjuda(linha, coluna, ElementosDisponiveis);
 	}
+	
+	
+	
+	
 }

@@ -22,7 +22,7 @@ public class JogoSudokuGUI extends JFrame{
 	
 	
 	public JogoSudokuGUI() {
-		tabuleiro = new Tabuleiro9x9();
+		tabuleiro = new Tabuleiro9x9(38);
 		IniciarframeTabuleiro();
 		//iniciarPanelJogo(tabuleiro);
 	}

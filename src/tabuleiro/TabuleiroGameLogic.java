@@ -11,7 +11,7 @@ public interface TabuleiroGameLogic {
 	
 	boolean espaçoValido(int linha, int coluna);
 	
-	boolean ehTabuleirosIguais();
+	boolean ehSudokuResolvido();
 	
 	boolean existeElemento(String elemento, String[] range);
 	
